@@ -32,28 +32,26 @@ const App = () => {
         {field.map((f, i) => (
           <div key={i}>
             <input
-              type="text"
               name="name"
               placeholder="Name"
               value={f.name}
               onChange={(event) => handeChange(i, event)}
             />
             <input
-              type="text"
               name="age"
               placeholder="Age"
               value={f.age}
               onChange={(event) => handeChange(i, event)}
             />
-            <Button type="button" onClick={() => handleRemove(i)}>
+            <button type="button" onClick={() => handleRemove(i)}>
               Remove
-            </Button>
+            </button>
           </div>
         ))}
-        <Button type="button" onClick={handleAdd}>
+        <button type="button" onClick={handleAdd}>
           Add field
-        </Button>
-        <Button type="submit">Submit</Button>
+        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
