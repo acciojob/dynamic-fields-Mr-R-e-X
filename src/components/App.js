@@ -3,57 +3,58 @@ import "./../styles/App.css";
 import { FormControl, Input, Button } from "@material-ui/core";
 
 const App = () => {
-  const [field, setFeild] = useState([]);
+  const [fields, setFields] = useState([{ name: "", age: "" }]);
 
-  const handleAdd = () => {
-    setFeild([...field, { name: "", age: "" }]);
+  const handleAddField = () => {
+    setFields([...fields, { name: "", age: "" }]);
   };
 
-  const handleRemove = (index) => {
-    setFeild(field.filter((_, i) => i !== index));
+  const handleRemoveField = (index) => {
+    const newFields = fields.filter((_, i) => i !== index);
+    setFields(newFields);
   };
 
-  const handeChange = (index, event) => {
+  const handleChange = (index, event) => {
     const { name, value } = event.target;
-    const newField = field.map((field, i) =>
+    const newFields = fields.map((field, i) =>
       i === index ? { ...field, [name]: value } : field
     );
-    setFeild(newField);
+    setFields(newFields);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({ ...field });
+    console.log(fields);
   };
 
   return (
-    <div id="main">
-      <form onSubmit={handleSubmit}>
-        {field.map((f, i) => (
-          <div key={i}>
-            <input
-              name="name"
-              placeholder="Name"
-              value={f.name}
-              onChange={(event) => handeChange(i, event)}
-            />
-            <input
-              name="age"
-              placeholder="Age"
-              value={f.age}
-              onChange={(event) => handeChange(i, event)}
-            />
-            <button type="button" onClick={() => handleRemove(i)}>
-              Remove
-            </button>
-          </div>
-        ))}
-        <button type="button" onClick={handleAdd}>
-          Add field
-        </button>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      {fields.map((field, index) => (
+        <div key={index} style={{ marginBottom: "10px" }}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={field.name}
+            onChange={(event) => handleChange(index, event)}
+          />
+          <input
+            type="text"
+            name="age"
+            placeholder="Age"
+            value={field.age}
+            onChange={(event) => handleChange(index, event)}
+          />
+          <button type="button" onClick={() => handleRemoveField(index)}>
+            Remove
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={handleAddField}>
+        Add More..
+      </button>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
