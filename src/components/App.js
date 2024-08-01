@@ -31,14 +31,14 @@ const App = () => {
       <form onSubmit={handleSubmit}>
         {field.map((f, i) => (
           <div key={i}>
-            <Input
+            <input
               type="text"
               name="name"
               placeholder="Name"
               value={f.name}
               onChange={(event) => handeChange(i, event)}
             />
-            <Input
+            <input
               type="text"
               name="age"
               placeholder="Age"
